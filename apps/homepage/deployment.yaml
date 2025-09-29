@@ -20,7 +20,7 @@ spec:
         - containerPort: 3000
         env:
         - name: HOMEPAGE_ALLOWED_HOSTS
-          value: "192.168.0.216,10.10.10.10"
+          value: "192.168.0.216:30080,10.10.10.10,localhost"
         - name: LOG_TARGETS
           value: "stdout"
         volumeMounts:
