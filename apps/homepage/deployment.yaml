@@ -18,10 +18,19 @@ spec:
         image: ghcr.io/gethomepage/homepage:latest
         ports:
         - containerPort: 3000
+        env:
+        - name: HOMEPAGE_ALLOWED_HOSTS
+          value: "192.168.0.216,10.10.10.10"
+        - name: LOG_TARGETS
+          value: "stdout"
         volumeMounts:
         - name: config
           mountPath: /app/config
+        - name: logs
+          mountPath: /app/config/logs
       volumes:
       - name: config
         configMap:
           name: homepage-config
+      - name: logs
+        emptyDir: {}
