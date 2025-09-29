@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-config
+  namespace: default
+data:
+  settings.yaml: |
+    title: My Homelab
+    theme: dark
+    color: slate
+  
+  services.yaml: |
+    - My Cluster:
+        - ArgoCD:
+            href: https://10.10.10.10:30443
+            description: GitOps Controller
+        - Hello World:
+            href: http://10.10.10.10:30000
+            description: Nginx test app
+  
+  widgets.yaml: |
+    - kubernetes:
+        cluster:
+          show: true
+          cpu: true
+          memory: true
+        nodes:
+          show: true
