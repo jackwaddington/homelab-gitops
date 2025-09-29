@@ -26,3 +26,6 @@ data:
           memory: true
         nodes:
           show: true
+  
+  kubernetes.yaml: |
+    mode: cluster
