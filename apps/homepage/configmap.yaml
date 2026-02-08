@@ -12,11 +12,11 @@ data:
   services.yaml: |
     - My Cluster:
         - ArgoCD:
-            href: https://10.10.10.10:30443
+            href: https://192.168.0.216:30443
             description: GitOps Controller
-        - Hello World:
-            href: http://10.10.10.10:30000
-            description: Nginx test app
+        - Grafana:
+            href: http://192.168.0.216:30300
+            description: Cluster Monitoring
   
   widgets.yaml: |
     - kubernetes:
