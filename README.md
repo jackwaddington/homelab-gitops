@@ -1,6 +1,6 @@
 # homelab-gitops
 
-GitOps repository for my k3s cluster, managed by [Argo CD](https://argo-cd.readthedocs.io/).
+GitOps repository for my [k3s cluster](https://github.com/jackwaddington/k3s), managed by [Argo CD](https://argo-cd.readthedocs.io/).
 
 ## Cluster
 
