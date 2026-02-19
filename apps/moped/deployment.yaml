@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moped
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moped
+  template:
+    metadata:
+      labels:
+        app: moped
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/api/metrics"
+    spec:
+      containers:
+      - name: moped
+        image: ghcr.io/jackwaddington/moped-service:latest
+        ports:
+        - containerPort: 8000
+        envFrom:
+        - secretRef:
+            name: moped-secret
+        livenessProbe:
+          httpGet:
+            path: /api/moped-entries/
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /api/moped-entries/
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+

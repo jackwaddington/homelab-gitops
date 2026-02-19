@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: moped-sync
+  namespace: default
+spec:
+  schedule: "0 3 * * 1"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: moped-sync
+            image: ghcr.io/jackwaddington/moped-service:latest
+            command: ["python", "manage.py", "sync_sheets"]
+            envFrom:
+            - secretRef:
+                name: moped-secret
+            volumeMounts:
+            - name: google-creds
+              mountPath: /secrets
+              readOnly: true
+          volumes:
+          - name: google-creds
+            secret:
+              secretName: moped-secret
+              items:
+              - key: credentials.json
+                path: credentials.json
+
