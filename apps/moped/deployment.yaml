@@ -25,6 +25,10 @@ spec:
         envFrom:
         - secretRef:
             name: moped-secret
+        volumeMounts:
+        - name: google-creds
+          mountPath: /secrets
+          readOnly: true
         livenessProbe:
           httpGet:
             path: /api/moped-entries/
@@ -37,4 +41,11 @@ spec:
             port: 8000
           initialDelaySeconds: 5
           periodSeconds: 10
+      volumes:
+      - name: google-creds
+        secret:
+          secretName: moped-secret
+          items:
+          - key: credentials.json
+            path: credentials.json
 
