@@ -13,6 +13,8 @@ GitOps repository for my [k3s cluster](https://github.com/jackwaddington/k3s), m
 | App | Namespace | Port | Source |
 |---|---|---|---|
 | [homepage](apps/homepage/) | default | 30080 | This repo |
+| [moped](apps/moped/) | default | 8000 (ClusterIP) | [moped](https://github.com/jackwaddington/moped) |
+| [timelapse-condenser](apps/timelapse-condenser/) | default | CronJob | This repo |
 | [monitoring](https://github.com/jackwaddington/jWorld-observability) | monitoring | 30300 (Grafana) | [jWorld-observability](https://github.com/jackwaddington/jWorld-observability) |
 
 ## Access
@@ -23,6 +25,8 @@ GitOps repository for my [k3s cluster](https://github.com/jackwaddington/k3s), m
 | Grafana | `http://<node-ip>:30300` |
 | Homepage | `http://<node-ip>:30080` |
 
+Monitoring (Prometheus + Grafana) is deployed from its own repo — [jWorld-observability](https://github.com/jackwaddington/jWorld-observability) — via a separate Argo CD Application.
+
 ## Repo Structure
 
 ```
@@ -32,4 +36,12 @@ apps/
     deployment.yaml
     serviceaccount.yaml
     service.yaml
+  moped/
+    cronjob.yaml
+    deployment.yaml
+    service.yaml
+  timelapse-condenser/
+    cronjob.yaml
+    pv.yaml
+    pvc.yaml
 ```
